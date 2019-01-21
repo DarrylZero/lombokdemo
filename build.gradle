@@ -1,10 +1,18 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+ }
 apply plugin: 'java'
+//apply plugin: 'nebula.provided-base'
+
 repositories {
     jcenter()
 }
 
 dependencies {
-    compile 'com.google.guava:guava:20.0'
+    compileOnly 'org.projectlombok:lombok:1.18.4'
+//    provided 'org.projectlombok:lombok:1.18.4'
+//    apt 'org.projectlombok:lombok:1.18.4'
     testCompile 'junit:junit:4.12'
 }
-
