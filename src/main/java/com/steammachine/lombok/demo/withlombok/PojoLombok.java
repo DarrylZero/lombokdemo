@@ -1,4 +1,4 @@
-package com.steammachine.lombok.demo.nolombok;
+package com.steammachine.lombok.demo.withlombok;
 
 import lombok.Data;
 

@@ -1,4 +1,4 @@
-package com.steammachine.lombok.demo.withlombok;
+package com.steammachine.lombok.demo.nolombok;
 
 /**
  *
