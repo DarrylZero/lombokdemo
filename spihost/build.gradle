@@ -14,3 +14,12 @@ dependencies {
     compile project(':spitypes')
     compile project(':spiaddition')
 }
+
+jar {
+    manifest {
+        attributes(
+                "Implementation-Title": "spihost",
+                "Main-Class": "com.steammachine.spi.demo.MainSpiDemo"
+        )
+    }
+}
