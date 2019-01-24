@@ -19,6 +19,14 @@
 *.tar.gz
 *.rar
 
+spitypes/spihost
+spitypes/out
+spiaddition/out
+spiaddition/build
+lombokdemo/build
+lombokdemo/out
+
+
 .idea
 .gradle
 build

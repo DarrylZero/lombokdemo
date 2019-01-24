@@ -1,18 +1,9 @@
-buildscript {
-    repositories {
-        jcenter()
+allprojects {
+    tasks.withType(JavaCompile) {
+        options.encoding = 'UTF-8'
     }
- }
-apply plugin: 'java'
-//apply plugin: 'nebula.provided-base'
 
-repositories {
-    jcenter()
-}
-
-dependencies {
-    compileOnly 'org.projectlombok:lombok:1.18.4'
-//    provided 'org.projectlombok:lombok:1.18.4'
-//    apt 'org.projectlombok:lombok:1.18.4'
-    testCompile 'junit:junit:4.12'
+    tasks.withType(Test) {
+        systemProperty "file.encoding", "UTF-8"
+    }
 }
