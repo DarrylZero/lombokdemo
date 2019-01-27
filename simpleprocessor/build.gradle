@@ -10,8 +10,6 @@ repositories {
 }
 
 dependencies {
-    compileOnly 'org.projectlombok:lombok:1.18.4'
+    compile 'com.squareup:javapoet:1.10.0'
     testCompile 'junit:junit:4.12'
-    compile project(':spitypes')
-
 }
