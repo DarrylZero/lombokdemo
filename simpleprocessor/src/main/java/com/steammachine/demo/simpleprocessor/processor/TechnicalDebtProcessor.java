@@ -2,6 +2,7 @@ package com.steammachine.demo.simpleprocessor.processor;
 
 import static java.lang.String.format;
 
+import com.steammachine.demo.simpleprocessor.annotations.TechnicalDebt;
 import java.util.List;
 import java.util.Set;
 import javax.annotation.processing.AbstractProcessor;
@@ -43,7 +44,7 @@ public class TechnicalDebtProcessor extends AbstractProcessor {
         debug(" ======================================================== ");
 
         for (TypeElement ann : annotations) {
-            debug(" ==> TypeElement ann = " + ann);
+            debug(" ==> TypeElement ann = %s", ann);
             //
             List<? extends Element> es = ann.getEnclosedElements();
             debug(" ====> ann.getEnclosedElements() count = " + es.size());
@@ -60,20 +61,15 @@ public class TechnicalDebtProcessor extends AbstractProcessor {
                 debug(" ========> ElementsAnnotatedWith: " + e2);
                 debug("           - Kind : " + e2.getKind());
 
+
                 // The name of the class is annotated by @Controller
                 String elementName = e2.getSimpleName().toString();
 
-
-                // Notify if misuse
-                if (!className.endsWith("Controller")) {
-                    debug("           - Error!!!");
-                    messager.printMessage(Kind.ERROR,
-                            "Class using @Controller must have suffix Controller", e2);
-                }
+                TechnicalDebt technicalDebt = e2.getAnnotation(TechnicalDebt.class);
+                technicalDebt.value();
+                debug("--->>> value found", technicalDebt.value());
             }
-
         }
-
         return true;
     }
 
