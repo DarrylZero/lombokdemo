@@ -13,3 +13,12 @@ dependencies {
     compile 'com.squareup:javapoet:1.10.0'
     testCompile 'junit:junit:4.12'
 }
+
+task buildProc(type: Copy) {
+    dependsOn 'build'
+    from 'build/libs'
+    into '../simpleprocessorchecks/libs'
+    include('**/*.jar')
+    outputs.upToDateWhen { false }
+}
+

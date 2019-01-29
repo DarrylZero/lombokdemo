@@ -11,5 +11,9 @@ repositories {
 
 dependencies {
     testCompile 'junit:junit:4.12'
-    runtime fileTree(dir: 'libs', include: '*.jar')
+    compileOnly fileTree(dir: 'libs', include: '*.jar')
+}
+
+task buildChecks {
+    dependsOn 'build'
 }
