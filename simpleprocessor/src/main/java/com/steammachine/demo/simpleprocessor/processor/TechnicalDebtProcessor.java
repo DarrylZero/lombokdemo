@@ -1,9 +1,13 @@
 package com.steammachine.demo.simpleprocessor.processor;
 
-import static java.lang.String.format;
-
 import com.steammachine.demo.simpleprocessor.annotations.TechnicalDebt;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.DateTimeException;
+import java.time.Instant;
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.Filer;
@@ -26,6 +30,8 @@ import javax.tools.Diagnostic.Kind;
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
 public class TechnicalDebtProcessor extends AbstractProcessor {
 
+    private static final boolean debug = false;
+
     private Filer filer;
     private Messager messager;
 
@@ -38,37 +44,37 @@ public class TechnicalDebtProcessor extends AbstractProcessor {
 
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment env) {
-//        debug("\n\n");
-//        debug(" ======================================================== ");
-//        debug("#process(...) in " + this.getClass().getSimpleName());
-//        debug(" ======================================================== ");
-
         for (TypeElement ann : annotations) {
-//            debug(" ==> TypeElement ann = %s", ann);
-            //
+            debug(" ==> TypeElement ann = " + ann);
             List<? extends Element> es = ann.getEnclosedElements();
-//            debug(" ====> ann.getEnclosedElements() count = %d", es.size());
+            debug(" ====> ann.getEnclosedElements() count = " + es.size());
             for (Element e : es) {
-//                debug(" ========> EnclosedElement: %s", e);
+                debug(" ========> EnclosedElement: " + e);
             }
 
             ElementKind kind = ann.getKind();
-//            debug(" ====> ann.getKind() = " + kind);
+            debug(" ====> ann.getKind() = " + kind);
             Set<? extends Element> e2s = env.getElementsAnnotatedWith(ann);
 
             debug(" ====> env.getElementsAnnotatedWith(ann) count = " + e2s.size());
             for (Element e2 : e2s) {
                 debug(" ========> ElementsAnnotatedWith: " + e2);
                 debug("           - Kind : " + e2.getKind());
-
-
-                // The name of the class is annotated by @Controller
-                String elementName = e2.getSimpleName().toString();
-
                 TechnicalDebt technicalDebt = e2.getAnnotation(TechnicalDebt.class);
-                technicalDebt.value();
-
                 debug("--->>> value found " + technicalDebt.value());
+                Optional<Instant> date = getDate(technicalDebt.value());
+                Instant now = Instant.now();
+                debug("date = " + date);
+                debug("now = " + now);
+
+                if (!date.isPresent()) {
+                    messager.printMessage(Kind.ERROR,
+                            "wrong value format " + technicalDebt.value());
+                } else if (now.compareTo(date.get()) > 0) {
+                    messager.printMessage(Kind.ERROR,
+                            "deadline has passed " + technicalDebt.value());
+                }
+
             }
         }
         return true;
@@ -79,9 +85,25 @@ public class TechnicalDebtProcessor extends AbstractProcessor {
         return SourceVersion.latestSupported();
     }
 
+    private Optional<Instant> getDate(String value) {
+        SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
+        Date parsed;
+        try {
+            parsed = format.parse(value);
+        } catch (ParseException e) {
+            return Optional.empty();
+        }
+        try {
+            return Optional.of(Instant.ofEpochMilli(parsed.getTime()));
+        } catch (DateTimeException e) {
+            return Optional.empty();
+        }
+    }
 
-    private void debug(String message, Object... args) {
-        messager.printMessage(Kind.NOTE, format(message, args));
+    private void debug(String message) {
+        if (debug) {
+            messager.printMessage(Kind.NOTE, message);
+        }
     }
 
 
