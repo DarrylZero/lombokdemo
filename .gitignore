@@ -26,8 +26,8 @@ spiaddition/build
 lombokdemo/build
 lombokdemo/out
 
-.gradle
 .idea
+.gradle
 .gradle
 build
 .gradle/**.*
