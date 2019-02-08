@@ -30,7 +30,7 @@ lombokdemo/out
 .idea
 .gradle
 build
-.gradle/*/*.*
+.gradle/**.*
 *.iml
 simpleprocessor/out
 
