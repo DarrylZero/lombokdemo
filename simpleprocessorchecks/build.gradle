@@ -1,19 +1,15 @@
-buildscript {
-    repositories {
-        jcenter()
-    }
-}
 apply plugin: 'java'
 
 repositories {
     jcenter()
+    maven { url "https://clojars.org/repo" }
 }
 
 dependencies {
     testCompile 'junit:junit:4.12'
-    compileOnly fileTree(dir: 'libs', include: '*.jar')
+    compileOnly 'com.steammachine.org:simple.annotation.processors:0.8.2'
 }
 
-task buildChecks {
+task buildchecks {
     dependsOn 'build'
 }

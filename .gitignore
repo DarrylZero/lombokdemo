@@ -25,10 +25,12 @@ spiaddition/out
 spiaddition/build
 lombokdemo/build
 lombokdemo/out
+lombokdemo/.gradle
 
+.gradle/
+.gradle
+.gradle
 .idea
-.gradle
-.gradle
 build
 .gradle/**.*
 *.iml

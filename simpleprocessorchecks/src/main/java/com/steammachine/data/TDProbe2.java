@@ -1,6 +1,6 @@
 package com.steammachine.data;
 
-import com.steammachine.demo.simpleprocessor.annotations.TechnicalDebt;
+import com.staemmachine.annotationprocessors.techdebt.annotations.TechnicalDebt;
 
 @TechnicalDebt(value = "01.02.2020")
 //@TechnicalDebt(value = "asdasd")
