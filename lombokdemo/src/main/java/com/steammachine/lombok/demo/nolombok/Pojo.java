@@ -1,11 +1,9 @@
 package com.steammachine.lombok.demo.nolombok;
 
 /**
- *
  * #STEP 1
  *
  * pojo object without lombok is very much longer
- *
  */
 public class Pojo {
 
@@ -23,6 +21,13 @@ public class Pojo {
     }
 
     @Override
+    public String toString() {
+        return "Pojo{" +
+                "id=" + id +
+                '}';
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -32,19 +37,11 @@ public class Pojo {
         }
 
         Pojo pojo = (Pojo) o;
-
         return id == pojo.id;
     }
 
     @Override
     public int hashCode() {
         return (int) (id ^ (id >>> 32));
-    }
-
-    @Override
-    public String toString() {
-        return "Pojo{" +
-                "id=" + id +
-                '}';
     }
 }

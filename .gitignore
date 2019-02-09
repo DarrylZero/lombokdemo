@@ -25,13 +25,16 @@ spiaddition/out
 spiaddition/build
 lombokdemo/build
 lombokdemo/out
+lombokdemo/.gradle
 
+.gradle/
+.gradle
 .gradle
 .idea
-.gradle
 build
-.gradle/*/*.*
+.gradle/**.*
 *.iml
+simpleprocessor/out
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*

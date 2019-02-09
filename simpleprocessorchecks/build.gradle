@@ -1,0 +1,15 @@
+apply plugin: 'java'
+
+repositories {
+    jcenter()
+    maven { url "https://clojars.org/repo" }
+}
+
+dependencies {
+    testCompile 'junit:junit:4.12'
+    compileOnly 'com.steammachine.org:simple.annotation.processors:0.8.2'
+}
+
+task buildchecks {
+    dependsOn 'build'
+}
