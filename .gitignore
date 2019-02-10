@@ -11,6 +11,8 @@
 *.tar.gz
 *.rar
 
+lombokdemo/out/
+
 build
 .gradle
 .idea
