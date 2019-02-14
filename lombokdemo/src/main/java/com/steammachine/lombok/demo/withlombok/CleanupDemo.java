@@ -1,12 +1,9 @@
 package com.steammachine.lombok.demo.withlombok;
 
 import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import lombok.Cleanup;
-import lombok.SneakyThrows;
-import lombok.var;
 
 public class CleanupDemo {
 
@@ -18,6 +15,12 @@ public class CleanupDemo {
             this.i = i;
         }
 
+        public static void shutUpStatic() {
+            System.out.println("shutUpStatic");
+        }
+        private static void shutUpStaticPrivate() {
+            System.out.println("shutUpStaticPrivate");
+        }
 
         void close() {
             System.out.println("close");
@@ -40,8 +43,10 @@ public class CleanupDemo {
     public static void process() throws IOException {
         @Cleanup InputStream byteArrayInputStream = getStream();
         @Cleanup("returns") I i = new I(1);
-        @Cleanup("returns") I i2 = new I(2);
+        @Cleanup("shutdown") I i2 = new I(2);
         @Cleanup("returns") I i3 = new I(3);
+        @Cleanup("shutUpStatic") I i4 = new I(3);
+        @Cleanup("shutUpStaticPrivate") I i5 = new I(3);
 
         System.out.println("after all usages of i");
     }
