@@ -1,6 +1,7 @@
 apply plugin: 'java'
 
 repositories {
+    mavenLocal()
     jcenter()
     mavenLocal()
     maven { url "https://clojars.org/repo" }
@@ -13,4 +14,3 @@ dependencies {
 }
 
 task buildchecks(dependsOn: 'build')
-
