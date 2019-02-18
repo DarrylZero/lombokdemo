@@ -10,6 +10,7 @@ repositories {
 dependencies {
     testCompile 'junit:junit:4.12'
     compileOnly 'com.steammachine.org:simple.annotation.processors:0.8.3'
+    testCompileOnly 'com.steammachine.org:simple.annotation.processors:0.8.3'
 //    compile 'org.kohsuke.metainf-services:metainf-services:1.1'
 }
 

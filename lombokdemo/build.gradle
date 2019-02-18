@@ -12,4 +12,5 @@ repositories {
 dependencies {
     testCompile 'junit:junit:4.12'
     compileOnly 'org.projectlombok:lombok:1.18.4'
+    testCompileOnly 'org.projectlombok:lombok:1.18.4'
 }

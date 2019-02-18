@@ -16,7 +16,6 @@ lombokdemo/out/
 build
 .gradle
 .idea
-build
 .gradle/**.*
 *.iml
 

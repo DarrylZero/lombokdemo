@@ -47,8 +47,6 @@ public class CleanupDemo {
         @Cleanup("returns") I i3 = new I(3);
         @Cleanup("shutUpStatic") I i4 = new I(3);
         @Cleanup("shutUpStaticPrivate") I i5 = new I(3);
-
-        System.out.println("after all usages of i");
     }
 
 
